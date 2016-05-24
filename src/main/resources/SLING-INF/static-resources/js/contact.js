@@ -6,6 +6,7 @@ $(function() {
         var $form = $(this);
         $.ajax($form.attr("action"), {
             "method": "POST",
+            "dataType": "JSON",
             "success": function(response) {
                 $.get($form.attr("data-success-path"), function(html) {
                     $form.replaceWith($(html));

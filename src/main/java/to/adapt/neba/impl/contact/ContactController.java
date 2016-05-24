@@ -1,6 +1,7 @@
 package to.adapt.neba.impl.contact;
 
 import io.neba.api.annotations.ResourceParam;
+import org.apache.sling.event.jobs.Job;
 import org.apache.sling.event.jobs.JobManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,9 +25,9 @@ public class ContactController {
 
     @RequestMapping(value = "/contact", method = POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void add(Contact contact) {
+    public Job add(Contact contact) {
         Map<String, Object> properties = contact.toMap();
-        jobManager.addJob("adaptto/contact/request", properties);
+        return jobManager.addJob("adaptto/contact/request", properties);
     }
 
     @ModelAttribute
